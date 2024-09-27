@@ -1,61 +1,58 @@
 // src/components/HomePage.jsx
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import profileImage from './profile.jpg'; // Ensure the path is correct
+import ReactTypingEffect from 'react-typing-effect';
+
 
 const HomePage = () => {
-    console.log('HomePage component rendered');
+  console.log('HomePage component rendered');
+
+  const [showHello, setShowHello] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowHello(true);
+    }, 500); // 0.5-second delay for the animation
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
-      {/* Hero Section */}
-      <header className="bg-blue-600 text-white py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-4">Welcome to My App</h1>
-          <p className="text-xl mb-8">A brief description of your app goes here.</p>
-          <a
-            href="/timeline"
-            className="bg-white text-blue-600 font-semibold px-6 py-3 rounded-full shadow hover:bg-gray-100"
-          >
-            View Timeline
-          </a>
-        </div>
-      </header>
+    <div className="min-h-screen bg-white flex flex-col">
+      <header className="flex-1 flex flex-col items-center justify-center pt-20 px-4">
+        {/* "Hello There" Animation */}
+        <h1
+          className={`text-4xl md:text-6xl font-bold mb-4 transition-opacity duration-1000 ${
+            showHello ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          Hello There!
+        </h1>
 
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-10 flex-1">
-        <section className="mb-10">
-          <h2 className="text-3xl font-bold mb-4">About Us</h2>
-          <p className="text-gray-700 leading-relaxed">
-            Add some content here about your app or company. You can describe features, services, or
-            anything you like.
+        {/* Central Image */}
+        <div className="mb-8">
+          <img
+            src={profileImage}
+            alt="Profile"
+            className="w-40 h-40 md:w-60 md:h-60 rounded-full object-cover shadow-lg"
+            loading="lazy"
+          />
+        </div>
+
+        {/* Welcome Message */}
+        <p className="text-xl md:text-2xl text-gray-700 mb-8 text-center">
+        <ReactTypingEffect
+            text="Welcome! Feel free to scroll around and explore my work!"
+            speed={100}
+            eraseSpeed={50}
+            typingDelay={500}
+            eraseDelay={2000}
+            cursorClassName="text-gray-700"
+          />        
           </p>
-        </section>
-
-        <section>
-          <h2 className="text-3xl font-bold mb-4">Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h3 className="text-xl font-semibold mb-2">Feature One</h3>
-              <p className="text-gray-700">Description of feature one.</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h3 className="text-xl font-semibold mb-2">Feature Two</h3>
-              <p className="text-gray-700">Description of feature two.</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h3 className="text-xl font-semibold mb-2">Feature Three</h3>
-              <p className="text-gray-700">Description of feature three.</p>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-6">
-        <div className="container mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} My App. All rights reserved.</p>
-        </div>
-      </footer>
+      </header>
     </div>
   );
 };
