@@ -1,8 +1,5 @@
-// src/components/HomePage.jsx
-
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import profileImage from './profile.jpg'; // Ensure the path is correct
+import profileImage from '../assets/profile.jpg'; // Ensure the path is correct
 import ReactTypingEffect from 'react-typing-effect';
 
 
